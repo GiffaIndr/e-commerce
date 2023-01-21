@@ -37,6 +37,10 @@ href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
 <style>
   *{
       text-decoration: none !important;
+      font-size: 20px;
+  }
+  input{
+    padding-bottom: 200px;
   }
 </style>
 
@@ -60,7 +64,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
         <a class="remove">
           <img src="{{asset('assets/img/'. $commer->image)}}" alt="">
 
-          <h3>Remove product</h3>
+          <h3> Views : {{$commer->views}}</h3>
         </a>
       </header>
 
@@ -75,19 +79,86 @@ href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
 
       <footer class="content">
 
-        <span class="qt">2</span>
+    
 
         <a class="full-price">
-          Beli Produk</a>
+        Rp. {{$commer->harga}}</a>
 
-        <h2 class="price">Rp.
-        {{$commer->harga}}
+    
+       
         </h2>
       </footer>
     </article>
 
     @endforeach
   </section>
+
+
+
+  @if(is_null(Auth::user()->payment))
+  
+  @elseif(Auth::user()->payment->status == 'tolak')
+  <section>
+  <div class="alert alert-danger"><p>Pembayaran Ditolak</p></div>
+  </section>
+    @elseif(Auth::user()->payment->status == 'validasi')
+    <section>
+    <div class="alert alert-success"><p style="font-size:20px">Pembayaran Berhasil</p></div>
+    </section>
+  @else
+  <section>
+  <div class="alert alert-warning"><p>Pembayaran sedang di verifikasi</p></div>
+  </section>
+  @endif
+  <div class="container" style="margin-top: 30px; padding-left: 100px; padding-right: 100px; padding-bottom: 200px; width:1000px;">
+    <div class="card p-2 shadow" style="width:800px; padding-bottom: 20px;">
+     
+      <form action="/chart/input" method="POST" style="padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px;"  enctype="multipart/form-data">
+        @csrf
+   
+        <p class="text-center"><b>Form Pembayaran</b></p>
+        <div class="form-group col-5">
+          <label for="inputPassword4">Nama Barang</label>
+          <select type="text" name="nama" class="form-control" id="inputPassword4" placeholder="nama"><option>{{$commer->barang}}</option></select>
+        </div>
+        <hr>
+       
+        <div class="form-row row d-flex ">
+          <div class="form-group col-6" style="margin-right:50px;">
+            <label for="inputEmail4">Method pembayaran</label><br>
+              <select type="search" name="bank" class="text-box" placeholder="bank" required>
+         <option hidden disable selected>Pilih Pembayaran</option>
+         @foreach($takes as $bank)
+         <option>{{$bank['name']}}</option>
+      @endforeach
+      </select>
+          </div>
+          <div class="form-group col-5">
+            <label for="inputPassword4">Nama Pemilik Rekening</label>
+            <input type="text" name="pemilik" class="form-control" id="inputPassword4" placeholder="nama">
+          </div>
+        </div>
+        <div class="form-row d-flex">
+        <div class="form-group col-12 pt-2">
+          <label for="inputEmail4">Nominal</label>
+          <select type="number" name="nominal" id="nominal" class="form-control" placeholder="nominal"><option>{{$commer->harga}}</option></select>
+        </div> 
+        </div>
+        <div class="form-group">
+          <div class="form-group pt-3">
+          <label for="inputEmail4">Foto Bukti</label>
+          <input type="file" name="bukti" class="form-control" id="inputEmail4" placeholder="Uploaf">
+        </div>
+        </div>
+        <br>
+        <input type="submit" name="submit" class="  btn btn-warning"></input>
+        <br>
+      </div>
+    </div>
+    </form>
+    </div>
+</div>
+  </div>
   @yield('content')
 </body>
 <script src="{{asset('assets/js/script.js')}}"></script>

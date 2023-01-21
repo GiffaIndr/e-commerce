@@ -49,6 +49,42 @@
     </div>
     </div>
   </form>
+  
+
+
+<div class="container" style="margin-top: 50px; margin-left: 400px; padding-right: 200px;">
+<table class="table" style="">
+<thead>
+<tr>
+<th scope="col">No</th>
+<th scope="col">Product ID</th>
+<th scope="col">Product</th>
+<th scope="col">Category</th>
+<th scope="col">Price</th>
+<th scope="col">Views</th>
+<th scope="col">action</th>
+</tr>
+</thead>
+@foreach ($commers as $commer)
+<tbody>
+<tr>
+<th scope="row">{{$loop->iteration}}</th>
+<td>{{$commer->id}}</td>
+<td>{{$commer->barang}}</td>
+<td>{{$commer->jenis}}</td>
+<td>{{$commer->harga}}</td>
+<td>{{$commer->views}}</td>
+<td> <form  action="{{route('delete', $commer->id)}}" method="post">
+@method('DELETE')
+@csrf
+<br>
+<button type="submit" class="fas fa-trash" style="border: 20px solid rgba(255, 255, 255, 0.573); border-radius:20%; font-size:15px;"></button>
+</form></td>
+</tr>
+</tbody>
+@endforeach
+
+</table>
   <script>
 
 

@@ -19,8 +19,8 @@
         <h4>Rp.{{$commer->harga}}</h4>
         <form action="#" method="post">
             @csrf
-    <input typ="number" name="value" value="">
-    <input  type="submit" value="Add Chart" style="width: 150px" class="btn"></input>
+
+    <a  href="{{route('chart.preference.product', $commer->id)}}"style="width: 150px" class="btn">Add Chart</a>
 </form>
 <h3>Product Details<i class="fa fa-indent"></i></h3>
     <br>

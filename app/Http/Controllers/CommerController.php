@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\commer;
+use App\Models\payment;
 use App\Models\User;
 use App\Models\Feed;
 use Illuminate\Http\Request;
@@ -77,17 +78,20 @@ class CommerController extends Controller
     }
 
     public function pembayaran(){
-        return view('users.pembayaran');
+        $payment = payment::all();
+        return view('admin.pay', compact('payment'));
     }
 
     
     public function dashboardAdmin(){
-        return view('admin.dashboard');
+        $commers = commer::all(); 
+        return view('admin.dashboard', compact('commers'));
     }
 
-    public function chart(Request $request){
-        $commers = commer::all();
-        return view('users.chart', compact('commers'));
+    public function chart($id){
+        $takes = Http::get('https://akmalweb.my.id/api/payment/')->json();
+        $commers = commer::where('id' ,$id)->get();
+        return view('users.chart', compact('commers', 'takes'));
     }
 
 public function screen($id){

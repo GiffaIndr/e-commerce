@@ -55,7 +55,7 @@
         </nav>
         <div class="icons">
             @auth
-            <a href="{{route('chart')}}"  class="fas fa-shopping-cart" style="font-size: 25px; color: rgb(85, 167, 85);"></a>
+            {{-- <a href="{{route('chart')}}"  class="fas fa-shopping-cart" style="font-size: 25px; color: rgb(85, 167, 85);"></a> --}}
             <div id="login-btn" class="fas fa-user"> {{Auth::user()->name}}</div>
         </div>
 <nav class="navbar">

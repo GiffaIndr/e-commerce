@@ -26,8 +26,8 @@ class User extends Authenticatable
 
     ];
 
-    public function commer(){
-        return $this->hasOne(commer::class);
+    public function payment(){
+        return $this->hasOne(payment::class);
     }
     /**
      * The attributes that should be hidden for serialization.

@@ -63,7 +63,7 @@ class FeedController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource. 
      *
      * @param  \App\Models\feed  $feed
      * @return \Illuminate\Http\Response

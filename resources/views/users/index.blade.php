@@ -45,7 +45,6 @@
                 <div class="stars">
                     <p style="font-size: 15px; display: block;">Jumlah : <span style="color: green;">{{$commer->jumlah}}</span> </p>
                 </div>
-                <a class="fas fa-shopping-cart" href="{{route('chart', $commer->id)}}"></a>
                 <a class="fas fa-eye" href="{{route('screen.product', $commer->id)}}"></a>
                 <form  action="{{route('delete', $commer->id)}}" method="post">
                     @method('DELETE')
